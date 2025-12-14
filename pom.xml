@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mooy1</groupId>
     <artifactId>SimpleUtils</artifactId>
-    <version>UNOFFICIAL</version>
+    <version>4.0.0-Folia</version>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -22,25 +22,43 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+        <repository>
+            <id>menthamc</id>
+            <url>https://repo.menthamc.org/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>github1</id>
+            <url>https://maven.pkg.github.com/Sparkpixel-MC/Slimefun4-CN-Folia</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>github2</id>
+            <url>https://maven.pkg.github.com/Sparkpixel-MC/InfinityLib-Folia</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.20.4-R0.1-SNAPSHOT</version>
+            <groupId>me.earthme.luminol</groupId>
+            <artifactId>luminol-api</artifactId>
+            <version>1.21.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.StarWishsama</groupId>
-            <artifactId>Slimefun4</artifactId>
-            <version>2024.2</version>
+            <groupId>com.github.slimefun</groupId>
+            <artifactId>slimefun</artifactId>
+            <version>4.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>net.guizhanss</groupId>
             <artifactId>GuizhanLibPlugin</artifactId>
-            <version>1.7.6</version>
+            <version>1.8.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -56,9 +74,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.SlimefunGuguProject</groupId>
-            <artifactId>InfinityLib</artifactId>
-            <version>1.3.9</version>
+            <groupId>io.github.mooy1</groupId>
+            <artifactId>infinitylib</artifactId>
+            <version>1.3.10-Folia</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -87,7 +105,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.6.1</version>
                 <configuration>
                     <minimizeJar>true</minimizeJar>
                     <relocations>
