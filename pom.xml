@@ -15,18 +15,6 @@
 
     <repositories>
         <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-        <repository>
-            <id>menthamc</id>
-            <url>https://repo.menthamc.org/repository/maven-public/</url>
-        </repository>
-        <repository>
             <id>github1</id>
             <url>https://maven.pkg.github.com/Sparkpixel-MC/Slimefun4-CN-Folia</url>
             <snapshots>
@@ -39,6 +27,18 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+        </repository>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
+            <id>menthamc</id>
+            <url>https://repo.menthamc.org/repository/maven-public/</url>
         </repository>
     </repositories>
 
