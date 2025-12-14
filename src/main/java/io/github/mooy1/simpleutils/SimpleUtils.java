@@ -1,24 +1,14 @@
 package io.github.mooy1.simpleutils;
 
-import java.io.File;
-import java.util.logging.Level;
-
-import net.guizhanss.guizhanlibplugin.updater.GuizhanUpdater;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.java.JavaPluginLoader;
-
 import io.github.mooy1.infinitylib.core.AbstractAddon;
 import io.github.mooy1.infinitylib.metrics.bukkit.Metrics;
 import io.github.mooy1.infinitylib.metrics.charts.SimplePie;
 import io.github.mooy1.simpleutils.implementation.Items;
+import net.guizhanss.guizhanlibplugin.updater.GuizhanUpdater;
+
+import java.util.logging.Level;
 
 public final class SimpleUtils extends AbstractAddon {
-
-    public SimpleUtils(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
-        super(loader, description, dataFolder, file,
-                "SlimefunGuguProject", "SimpleUtils", "master", "auto-update");
-    }
-
     public SimpleUtils() {
         super("SlimefunGuguProject", "SimpleUtils", "master", "auto-update");
     }
