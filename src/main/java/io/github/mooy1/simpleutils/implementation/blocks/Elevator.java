@@ -117,7 +117,7 @@ public final class Elevator extends SlimefunItem implements Listener {
         if (to != null) {
             to.setPitch(e.getPlayer().getLocation().getPitch());
             to.setYaw(e.getPlayer().getLocation().getYaw());
-            e.getPlayer().teleport(to.add(.5, 1, .5));
+            e.getPlayer().teleportAsync(to.add(.5, 1, .5));
             e.getPlayer().playSound(to, Sound.BLOCK_PISTON_CONTRACT, 1.0F, 1.8F);
         }
     }
