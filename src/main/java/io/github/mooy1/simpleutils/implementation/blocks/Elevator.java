@@ -70,8 +70,7 @@ public final class Elevator extends SlimefunItem implements Listener {
 
     @EventHandler
     private void onJump(@Nonnull PlayerMoveEvent e) {
-        if (e.getTo() != null && e.getTo().getY() > e.getFrom().getY()
-                && e.getFrom().getY() - e.getFrom().getBlockY() < 0.05) {
+        if (e.getTo().getY() > e.getFrom().getY() && e.getFrom().getY() - e.getFrom().getBlockY() < 0.05) {
             Location check = elevatorUnder(e.getFrom());
 
             if (StorageCacheUtils.isBlock(check, getId())) {
@@ -108,18 +107,20 @@ public final class Elevator extends SlimefunItem implements Listener {
             }
         }
     }
-    
+
     private static Location elevatorUnder(Location l) {
         return l.subtract(0, 1, 0).getBlock().getLocation();
     }
-    
+
     private static void teleport(PlayerEvent e, Location to) {
         if (to != null) {
             to.setPitch(e.getPlayer().getLocation().getPitch());
             to.setYaw(e.getPlayer().getLocation().getYaw());
-            e.getPlayer().teleportAsync(to.add(.5, 1, .5));
-            e.getPlayer().playSound(to, Sound.BLOCK_PISTON_CONTRACT, 1.0F, 1.8F);
+            e.getPlayer().getScheduler().run(SimpleUtils.instance(), scheduledTask -> e.getPlayer().teleportAsync(to.add(.5, 1, .5)).thenAccept(success -> {
+                if (success) {
+                    e.getPlayer().playSound(to, Sound.BLOCK_PISTON_CONTRACT, 1.0F, 1.8F);
+                }
+            }), null);
         }
     }
-
 }
