@@ -1,9 +1,9 @@
 /bin/
 /.settings/
-/target/
+/build/
+/.gradle/
 /.idea/
 *.iml
 .project
 .classpath
-dependency-reduced-pom.xml
 .DS_Store

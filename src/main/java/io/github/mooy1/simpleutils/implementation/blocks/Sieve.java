@@ -89,14 +89,16 @@ public final class Sieve extends MultiBlockMachine {
 
         ItemStack output = item.clone();
 
-        Scheduler.run(40, () -> {
+        // 延迟任务要访问方块/箱子等 Region 状态, 必须回到该方块所属 Region 线程执行
+        Scheduler.runAtRegion(b.getLocation(), 40, () -> {
             Optional<Inventory> outputChest = OutputChest.findOutputChestFor(b.getRelative(BlockFace.DOWN), output);
             if (outputChest.isPresent()) {
                 outputChest.get().addItem(output);
             } else {
                 b.getWorld().dropItemNaturally(b.getLocation().add(0, .5, 0), output);
             }
-            p.playSound(b.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1);
+            // 玩家实体只能在其实体线程访问, 音效回到玩家实体调度器
+            Scheduler.runAtEntity(p, () -> p.playSound(b.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1));
         });
     }
 

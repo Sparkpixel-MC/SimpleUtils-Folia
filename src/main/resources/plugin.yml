@@ -6,7 +6,7 @@ main: io.github.mooy1.simpleutils.SimpleUtils
 depend: [Slimefun]
 softdepend: [InfinityExpansion, GuizhanLibPlugin]
 version: ${project.version}
-api-version: 1.16
+api-version: 26.2
 folia-supported: true
 
 commands:

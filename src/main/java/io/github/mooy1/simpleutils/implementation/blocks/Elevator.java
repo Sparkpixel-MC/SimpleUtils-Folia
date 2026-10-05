@@ -20,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Maps;
 import io.github.mooy1.infinitylib.common.Events;
 import io.github.mooy1.simpleutils.SimpleUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
@@ -32,7 +33,8 @@ import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 
 public final class Elevator extends SlimefunItem implements Listener {
 
-    private final BiMap<Location, Location> locations = HashBiMap.create();
+    // Folia 下玩家事件会并发到达不同 Region 线程，BiMap 必须同步包装
+    private final BiMap<Location, Location> locations = Maps.synchronizedBiMap(HashBiMap.create());
 
     public Elevator(ItemGroup category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);

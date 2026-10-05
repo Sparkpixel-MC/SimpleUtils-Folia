@@ -1,0 +1,72 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '9.6.1'
+}
+
+group = 'io.github.mooy1'
+version = '4.0.0-Folia'
+
+def foliaApiVersion = '26.2.build.7-beta'
+def slimefunVersion = '2025.1.2'
+def guizhanLibVersion = '1.8.1'
+def lombokVersion = '1.18.42'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'papermc'
+        url = 'https://repo.papermc.io/repository/maven-public/'
+    }
+    maven {
+        name = 'jitpack'
+        url = 'https://jitpack.io'
+    }
+}
+
+dependencies {
+    // 原生 Folia API（Regionized 多线程调度）
+    compileOnly "dev.folia:folia-api:${foliaApiVersion}"
+    compileOnly("com.github.SlimefunGuguProject:Slimefun4:${slimefunVersion}") {
+        transitive = false
+    }
+    compileOnly("net.guizhanss:GuizhanLibPlugin:${guizhanLibVersion}") {
+        transitive = false
+    }
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    // 本地捆绑的 InfinityLib（Folia 适配版），打包时 shade + relocate
+    implementation files('libs/InfinityLib.jar')
+}
+
+processResources {
+    filesMatching('plugin.yml') {
+        expand('project': [version: project.version.toString()])
+    }
+    from(rootDir) {
+        include 'LICENSE'
+    }
+}
+
+jar {
+    archiveClassifier = 'unshaded'
+}
+
+shadowJar {
+    archiveClassifier = ''
+    minimize {
+        exclude(dependency('io.github.mooy1:.*:.*'))
+    }
+    relocate 'io.github.mooy1.infinitylib', 'io.github.mooy1.simpleutils.infinitylib'
+}

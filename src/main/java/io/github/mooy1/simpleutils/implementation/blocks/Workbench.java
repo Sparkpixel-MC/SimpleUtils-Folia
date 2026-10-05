@@ -1,8 +1,8 @@
 package io.github.mooy1.simpleutils.implementation.blocks;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiFunction;
 import java.util.logging.Level;
 
@@ -50,7 +50,8 @@ public final class Workbench extends MenuBlock implements Listener {
 
     private final NamespacedKey displayKey = SimpleUtils.createKey("display");
     private final BiFunction<ItemStack[], Player, ItemStack> craftItem;
-    private final Map<UUID, BlockMenu> openMenus = new HashMap<>();
+    // Folia 下点击/拖拽事件可能从不同 Region 线程并发访问
+    private final Map<UUID, BlockMenu> openMenus = new ConcurrentHashMap<>();
     private final FakeEnhancedCrafter fakeEnhancedCrafter;
 
     public Workbench(ItemGroup category, SlimefunItemStack itemStack, RecipeType recipeType, ItemStack[] r) {
@@ -221,7 +222,8 @@ public final class Workbench extends MenuBlock implements Listener {
     }
 
     private void refreshOutput(@Nonnull BlockMenu menu, Player p) {
-        Scheduler.run(() -> {
+        // 菜单内的物品属于方块所在 Region, 延迟刷新必须回到该 Region 线程
+        Scheduler.runAtRegion(menu.getLocation(), () -> {
             ItemStack[] input = new ItemStack[9];
             for (int i = 0 ; i < INPUT_SLOTS.length ; i++) {
                 input[i] = menu.getItemInSlot(INPUT_SLOTS[i]);

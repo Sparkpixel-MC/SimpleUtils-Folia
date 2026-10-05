@@ -1,8 +1,8 @@
 package io.github.mooy1.simpleutils.implementation.blocks;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.annotation.Nullable;
 
@@ -18,8 +18,9 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.ItemStackSnapsho
 
 class FakeEnhancedCrafter extends EnhancedCraftingTable {
 
-    private final List<ItemStackSnapshot[]> inputs = new ArrayList<>();
-    private final List<ItemStack> outputs = new ArrayList<>();
+    // init 在全局线程异步写入, craft 可能从任意 Region 线程并发读取
+    private final List<ItemStackSnapshot[]> inputs = new CopyOnWriteArrayList<>();
+    private final List<ItemStack> outputs = new CopyOnWriteArrayList<>();
 
     FakeEnhancedCrafter(ItemGroup category, SlimefunItemStack item) {
         super(category, item);
