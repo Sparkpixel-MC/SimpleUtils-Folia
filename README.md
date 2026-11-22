@@ -28,7 +28,7 @@ Slimefun 版本: 2025.1.2+
 ./gradlew build
 ```
 
-产物位于 `build/libs/SimpleUtils-4.0.0-Folia.jar`。
+产物位于 `build/libs/SimpleUtils-4.1-Folia.jar`。
 
 ## 更新日志
 
