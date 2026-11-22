@@ -12,25 +12,23 @@
 
 ## 下载
 
-点击这里下载 SimpleUtils: [下载 SimpleUtils](https://builds.guizhanss.net/ybw0014/SimpleUtils-CN/master)
-
-<p align="center">
-  <a href="https://github.com/ybw0014/SimpleUtils-CN/actions/workflows/build.yml">
-    <img src="https://github.com/ybw0014/SimpleUtils-CN/actions/workflows/build.yml/badge.svg" alt="Build"/>
-  </a>
-
-  <a href="https://builds.guizhanss.net/ybw0014/SimpleUtils-CN/master">
-    <img src="https://builds.guizhanss.net/f/ybw0014/SimpleUtils-CN/master/badge.svg" alt="Build status"/>
-  </a>
-</p>
+[下载 SimpleUtils](https://resources.guizhanss.com/plugin/SimpleUtils)
 
 ## 需求
 
-Minecraft 版本: 1.16+ (建议使用 Paper 端)
+Minecraft 版本: 26.3+ (建议使用 Folia / Paper 端)
 
-Slimefun 版本: DEV 966+
+Slimefun 版本: 2025.1.2+
 
-[![Build Status](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/master/badge.svg)](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/master/)
+本分支使用 Gradle 构建，并已适配 Folia 的多线程 Region 调度。
+
+## 构建
+
+```bash
+./gradlew build
+```
+
+产物位于 `build/libs/SimpleUtils-4.0.0-Folia.jar`。
 
 ## 更新日志
 
