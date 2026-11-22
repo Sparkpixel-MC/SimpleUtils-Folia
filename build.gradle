@@ -6,9 +6,9 @@ plugins {
 group = 'io.github.mooy1'
 version = '4.0.0-Folia'
 
-def foliaApiVersion = '26.2.build.7-beta'
+def foliaApiVersion = '26.3.build.26-stable'
 def slimefunVersion = '2025.1.2'
-def guizhanLibVersion = '1.8.1'
+def guizhanLibVersion = '2.5.0'
 def lombokVersion = '1.18.42'
 
 java {

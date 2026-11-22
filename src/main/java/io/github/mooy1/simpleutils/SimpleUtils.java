@@ -1,10 +1,11 @@
 package io.github.mooy1.simpleutils;
 
+import io.github.mooy1.infinitylib.common.Scheduler;
 import io.github.mooy1.infinitylib.core.AbstractAddon;
 import io.github.mooy1.infinitylib.metrics.bukkit.Metrics;
 import io.github.mooy1.infinitylib.metrics.charts.SimplePie;
 import io.github.mooy1.simpleutils.implementation.Items;
-import net.guizhanss.guizhanlibplugin.updater.GuizhanUpdater;
+import net.guizhanss.minecraft.guizhanlib.updater.GuizhanUpdater;
 
 import java.util.logging.Level;
 
@@ -26,11 +27,15 @@ public final class SimpleUtils extends AbstractAddon {
         }
 
         Items.setup(this);
-        Metrics metrics = new Metrics(this, 10285);
-        String ixInstalled = String.valueOf(getServer().getPluginManager().isPluginEnabled("InfinityExpansion"));
-        String autoUpdates = String.valueOf(autoUpdatesEnabled());
-        metrics.addCustomChart(new SimplePie("ix_installed", () -> ixInstalled));
-        metrics.addCustomChart(new SimplePie("auto_updates", () -> autoUpdates));
+
+        // bStats 的提交任务走的是 legacy BukkitScheduler, Folia 上会直接抛 UnsupportedOperationException
+        if (!Scheduler.isFolia()) {
+            Metrics metrics = new Metrics(this, 10285);
+            String ixInstalled = String.valueOf(getServer().getPluginManager().isPluginEnabled("InfinityExpansion"));
+            String autoUpdates = String.valueOf(autoUpdatesEnabled());
+            metrics.addCustomChart(new SimplePie("ix_installed", () -> ixInstalled));
+            metrics.addCustomChart(new SimplePie("auto_updates", () -> autoUpdates));
+        }
     }
 
     @Override
